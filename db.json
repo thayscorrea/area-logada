@@ -1,0 +1,12 @@
+{
+  "documents": [
+    {
+      "type": "CPF",
+      "vertical": "health"
+    },
+    {
+      "type": "RG",
+      "vertical": "all"
+    }
+  ]
+}
