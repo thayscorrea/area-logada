@@ -1,11 +1,23 @@
-import { createContext, useState, useEffect } from "react"
-import { GoogleAuthProvider, signInWithPopup } from "firebase/auth"
+import { createContext, useState } from "react"
+import { GoogleAuthProvider, signInWithPopup, signOut } from "firebase/auth"
+
 import { firebaseAuth } from "../services/firebase"
 
 export const AuthContext = createContext({})
 
 export function AuthProvider({ children }){
-  const [user, setUser] = useState()
+  const [isAuthenticated, setIsAuthenticated] = useState(false)
+  const [user, setUser] = useState(() => {
+    const userData = localStorage.getItem('@hacka:user')
+
+    if(!userData){
+      setIsAuthenticated(false)
+      return null
+    }
+
+    setIsAuthenticated(true)
+    return JSON.parse(userData)
+  })
 
   async function signInWithGoogle(){
     const provider = new GoogleAuthProvider()
@@ -15,34 +27,33 @@ export function AuthProvider({ children }){
     if(result.user){
       const { displayName, email, photoURL, uid } = result.user
 
-      setUser({
+      const user = {
         id: uid,
         name: displayName,
         email,
         avatar: photoURL,
-      })
+      }
+
+      localStorage.setItem('@hacka:user', JSON.stringify(user))
+
+      setUser(user)
     }
   }
 
-  useEffect(() => {
-    const unsubscribe = firebaseAuth.onAuthStateChanged((user) => {
-      if (user) {
-        const { displayName, email, photoURL, uid } = user
+  async function signOutFirebase(){
+    try {
+      await signOut(firebaseAuth)
 
-        setUser({
-          id: uid,
-          name: displayName,
-          email,
-          avatar: photoURL,
-        })
-      }
-    })
+      localStorage.removeItem('@hacka:user')
 
-    return () => unsubscribe()
-  }, [])
+      setUser(null)
+    } catch (err) {
+      console.log(err)
+    }
+  }
 
   return (
-    <AuthContext.Provider value={{ user, signInWithGoogle }}>
+    <AuthContext.Provider value={{ user, isAuthenticated, signInWithGoogle, signOutFirebase }}>
       {children}
     </AuthContext.Provider>
   )

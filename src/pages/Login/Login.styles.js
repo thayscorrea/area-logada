@@ -7,44 +7,54 @@ export const Wrapper = styled.div`
 `
 
 export const Form = styled.form`
-  box-shadow: 0 3px 4px 0 rgba(0,0,0,.25);
   width: 100%;
-  max-width: 340px;
-  display: grid;
-  justify-content: center;
-  padding: 30px;
-  background: #FFF;
+  max-width: 38.4rem;
+
   display: flex;
   flex-direction: column;
-  align-items: center;
+
+  & > a {
+    color: #7A7A80;
+    display: inline-block;
+    margin: 2.4rem 0;
+    outline: 0;
+    text-decoration: none;
+
+    &:hover,
+    &:focus {
+      text-decoration: underline;
+    }
+  }
 `
 
 export const LogoWrapper = styled.div`
   width: 14rem;
+  margin: 0 auto;
 `
 
-export const Button = styled.button`
-  padding: 0 32px;
-  height: 48px;
-  background-color: #4285f4;
-  border-radius: 4px;
-  box-shadow: 0 3px 4px 0 rgba(0,0,0,.25);
-  margin-top: 20px;
-  color: #fff;
-  border: 0;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  cursor: pointer;
-  transition: all 0.2s ease-in;
+export const Description = styled.p`
+  color: #7A7A80;
+  text-align: center;
+  margin: 2.4rem auto;
+  max-width: 25.4rem;
+`
+
+export const Divider = styled.div`
+  color: #999;
+  font-size: 1.4rem;
   font-weight: 500;
+  text-transform: uppercase;
+  margin: 1.6rem 0;
 
-  &:hover {
-    box-shadow: 0 0 6px #4285f4;
-  }
+  display: flex;
+  align-items: center;
+  gap: 1.6rem;
 
-  &:active {
-    background: #1669F2;
+  &::after,
+  &::before {
+    content: '';
+    width: 100%;
+    height: 1px;
+    background: #CCC;
   }
 `

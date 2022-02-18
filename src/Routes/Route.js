@@ -1,15 +1,13 @@
-import { Route as ReactDOMRoute, Redirect } from "react-router-dom";
+import { Route as ReactDOMRoute, Redirect } from "react-router-dom"
 
-import { useAuth } from "../hooks/useAuth";
+import { useAuth } from "../hooks/useAuth"
 
 export function Route({
-  isPrivate = false,
   component: Component,
+  isPrivate = false,
   ...rest
 }){
-  const { user } = useAuth();
-
-  console.log(user)
+  const { user } = useAuth()
 
   return (
     <ReactDOMRoute
@@ -20,8 +18,8 @@ export function Route({
         ) : (
           <Redirect
             to={{
-              pathname: isPrivate ? "/" : "/admin",
-              state: { form: location },
+              pathname: isPrivate ? "/login" : "/",
+              state: { form: location }
             }}
           />
         )

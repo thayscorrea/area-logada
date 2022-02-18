@@ -16,12 +16,23 @@ export const GlobalStyles = createGlobalStyle`
     font-size: 62.5%;
   }
 
+  body {
+    background: #F4F5F6;
+    color: #333;
+  }
+
   body,
   button,
   input,
   textarea,
   select {
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-family: 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     font-size: 1.6rem;
+  }
+
+  img {
+    max-width: 100%;
+    display: block;
+    height: auto;
   }
 `
